@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket</title>
+    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+<body>
+<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
+    enabled. Please enable
+    Javascript and reload this page!</h2></noscript>
+  <div id="main-content" class="container">
+    <div class=row>
+        <div class="col-xs-6">
+          <h3 class="">Publishing</h3>
+          <div id="publishing" class="table-responsive scrollable">
+            <table class="table">
+                <tbody id="publishing-table-body">
+                </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <h3 class="sub-header">Subscriptions</h3>
+          <div id="subscriptions" class="table-responsive scrollable">
+            <table id="subscriptions-table-body" class="table table-striped">
+              <tbody>
+              </tbody>
+            </table></div>
+        </div>
+    </div>
+    <div class=row>
+          <div class="col-xs-6">
+              <h3 class="sub-header">Registrations</h3>
+              <div id="registrations" class="table-responsive scrollable">
+                  <table class="table table-striped">
+                    <tbody id="registrations-table-body">
+                    </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <h3 class="sub-header">Notifications</h3>
+              <div id="notifications" class="table-responsive scrollable">
+                <table class="table table-striped">
+                  <tbody id="notifications-table-body">
+                  </tbody>
+                </table></div>
+            </div>
+          </div>
+</div>
+</body>
+</html>
