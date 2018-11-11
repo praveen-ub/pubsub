@@ -8,24 +8,25 @@ public class AppResponse{
 			this.message = message;
 		}
 		
-		public AppResponse(int status, String message, Object response){
+		public AppResponse(int status, String message, Object data){
 			this.status = status;
 			this.message = message;
-			this.response = response;
+			this.data = data;
 		}
 	
 		private int status;
 		
 		private String message;
 		
-		private Object response;
+		private Object data;
 		
-		public Object getResponse() {
-			return response;
+
+		public Object getData() {
+			return data;
 		}
 
-		public void setResponse(Object response) {
-			this.response = response;
+		public void setData(Object data) {
+			this.data = data;
 		}
 
 		public int getStatus() {

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.pubsub.project2.dao.MessageDao;
 import com.pubsub.project2.dto.Message;
-import com.pubsub.project2.entity.tables.records.MessageRecord;
 import com.pubsub.project2.entity.tables.records.SubscriberRecord;
 
 @Service
@@ -24,7 +23,8 @@ public class MessageService{
 	
 	public boolean publish(Message message, Long publisherId){
 		
-		MessageRecord messageRecord = messageDao.create(message, publisherId);
+		message.setNotificationType("newsUpdate");
+		messageDao.create(message, publisherId);
 		List<SubscriberRecord> subscribers = subscriberService.getTopicSubscribers(message.getTopic());
 		notificationService.notifySubscribers(message, subscribers);
 		return true;

@@ -12,6 +12,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.pubsub.project2.dao.SubscriberDao;
 import com.pubsub.project2.dto.Activity;
 import com.pubsub.project2.dto.Message;
 import com.pubsub.project2.entity.tables.records.SubscriberRecord;
@@ -22,7 +23,14 @@ public class NotificationService{
 	@Autowired
 	private SimpMessagingTemplate template;
 	
+	@Autowired
+	private SubscriberDao subscriberDao;
+	
 	public boolean notifySubscribers(Message message, List<SubscriberRecord> subscribers){
+		
+		if(subscribers == null){
+			subscribers = subscriberDao.findAllSubscribers();
+		}
 		
 		for (SubscriberRecord subscriber : subscribers){
 			
@@ -37,7 +45,12 @@ public class NotificationService{
 			String response = responseEntity.getBody();
 			System.out.println("Response is::"+response);
 			Activity activity = new Activity();
-			activity.setAction("Subscriber with id::"+subscriber.getId()+":: has been notified of message with topic::"+message.getTopic());
+			if("topicUpdate".equals(message.getNotificationType())){
+				activity.setAction("Subscriber with id::"+subscriber.getId()+":: has been notified of new topic '"+message.getTopic()+"'added");
+			}
+			else{
+				activity.setAction("Subscriber with id::"+subscriber.getId()+":: has been notified of message with topic::"+message.getTopic());
+			}
 			template.convertAndSend("/topic/notifications",activity);
 		}
 		return true;

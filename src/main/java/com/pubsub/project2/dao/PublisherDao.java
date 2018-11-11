@@ -3,6 +3,7 @@ package com.pubsub.project2.dao;
 import static com.pubsub.project2.entity.tables.Publisher.PUBLISHER;
 
 import org.jooq.DSLContext;
+import org.jooq.Record;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +18,14 @@ public class PublisherDao{
 	
 	public Long addPublisher(Publisher publisher){
 		
-		dsl.insertInto(PUBLISHER,PUBLISHER.WEBHOOK_URL)
+		String webHookUrl = publisher.getWebHookUrl();
+		PublisherRecord record = findPublisherByWebhookUrl(webHookUrl);
+		if(record == null){
+			dsl.insertInto(PUBLISHER,PUBLISHER.WEBHOOK_URL)
 			.values(publisher.getWebHookUrl()).execute();
-		PublisherRecord record = dsl.select().from(PUBLISHER).where(PUBLISHER.WEBHOOK_URL.eq(publisher.getWebHookUrl())).fetchOne().into(PublisherRecord.class);
-		System.out.println("Inserted record");
+			record = dsl.select().from(PUBLISHER).where(PUBLISHER.WEBHOOK_URL.eq(publisher.getWebHookUrl())).fetchOne().into(PublisherRecord.class);
+			System.out.println("Inserted record");
+		}
 		return record.getId();
 	}
 	
@@ -35,11 +40,14 @@ public class PublisherDao{
 		return true;
 	}
 	
-//	public Publisher findPublisherById(Long publisherId){
-//		
-//		Session session = sessionFactory.getCurrentSession();
-//		return session.get(Publisher.class, publisherId);
-//	}
+	public PublisherRecord findPublisherByWebhookUrl(String webHookUrl){
+		
+		Record record = dsl.select().from(PUBLISHER).where(PUBLISHER.WEBHOOK_URL.eq(webHookUrl)).fetchOne(); 
+		if(record !=null){
+			return record.into(PublisherRecord.class);
+		}
+		return null;
+	}
 	
 
 //	public List<Publisher> findAllPublishers(){

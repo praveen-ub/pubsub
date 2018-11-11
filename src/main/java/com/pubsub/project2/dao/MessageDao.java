@@ -19,11 +19,12 @@ public class MessageDao{
 	
 	@Autowired
 	private TopicDao topicDao;
-	
+		
 	public MessageRecord create(Message message, Long publisherId){
 		
 		//set UUID on message
-		Long topicId = topicDao.findTopicByName(message.getTopic()).getId();
+		String topicName = message.getTopic();
+		Long topicId = topicDao.findTopicByName(topicName).getId();
 		return dsl.insertInto(MESSAGE,MESSAGE.CONTENT,MESSAGE.PUBLISHER_ID, MESSAGE.TOPIC_ID, MESSAGE.MESSAGE_ID)
 			.values(message.getContent(),publisherId,topicId, UUID.randomUUID().toString()).returning(MESSAGE.ID).fetchOne();
 	}

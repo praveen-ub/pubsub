@@ -1,7 +1,11 @@
+drop database pubsub_phase2;
+
+create database pubsub_phase2;
+
 use pubsub_phase2;
 
 create table publisher (
-    
+
     id bigint not null auto_increment,
     webhook_url varchar(255) not null,
     nick_name varchar(255),
@@ -18,7 +22,7 @@ create table subscriber (
 );
 
 create table topic (
-    
+
     id bigint not null auto_increment,
     name varchar(255),
     is_deleted tinyint default 0,
@@ -39,7 +43,7 @@ create table message(
 );
 
 create table subscription(
-    
+
     id bigint not null auto_increment,
     subscriber_id bigint not null,
     topic_id bigint not null,

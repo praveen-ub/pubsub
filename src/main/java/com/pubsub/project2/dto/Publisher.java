@@ -1,5 +1,6 @@
 package com.pubsub.project2.dto;
 
+import java.util.List;
 
 public class Publisher{
 	

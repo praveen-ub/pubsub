@@ -1,5 +1,9 @@
 package com.pubsub.project2.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +16,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.pubsub.project2.dto.Activity;
 import com.pubsub.project2.dto.AppResponse;
 import com.pubsub.project2.dto.Subscriber;
+import com.pubsub.project2.dto.Topic;
 import com.pubsub.project2.service.SubscriberService;
+import com.pubsub.project2.service.TopicService;
 
 @RestController
 @RequestMapping("/api/subscribers")
@@ -20,6 +26,9 @@ public class SubscriberController{
 	
 	@Autowired
 	private SubscriberService subscriberService;
+	
+	@Autowired
+	private TopicService topicService;
 	
 	@Autowired
 	private SimpMessagingTemplate template;
@@ -31,9 +40,32 @@ public class SubscriberController{
 		Long subscriberId = subscriberService.register(subscriber);
 		System.out.println("Regisration done::"+subscriberId);
 		Activity activity = new Activity();
-		activity.setAction("Publisher with endpoint::"+subscriber.getWebHookUrl()+" has joined");
+		activity.setAction("Subscriber with endpoint::"+subscriber.getWebHookUrl()+" has joined");
 		template.convertAndSend("/topic/registrations",activity);
-		return new AppResponse(200, "Success",subscriberId);
+		HashMap dataMap = new HashMap();
+		dataMap.put("id",subscriberId);
+		return new AppResponse(200, "Success",dataMap);
+	}
+	
+	@RequestMapping(value="/{id}/subscriptions",method=RequestMethod.GET)
+	public AppResponse getTopics(@PathVariable("id") Long subscriberId){
+		
+		List<Topic> topics = topicService.getAllTopics();
+		List<Topic> subscribedtopics = subscriberService.getSubsribedTopics(subscriberId);
+		List topicsData = new ArrayList();
+		
+		for(Topic topic: topics){
+			HashMap<String, String> topicsMap = new HashMap<String, String>();
+			topicsMap.put("name",topic.getName());
+			if(subscribedtopics.contains(topic)){
+				topicsMap.put("subscription", "Subscribed");
+			}
+			else{
+				topicsMap.put("subscription", "Unsubscribed");
+			}
+			topicsData.add(topicsMap);
+		}
+		return new AppResponse(200,"Success",topicsData);
 	}
 	
 	@RequestMapping(value="/{id}/subscribe",method=RequestMethod.POST)

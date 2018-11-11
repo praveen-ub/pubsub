@@ -1,11 +1,14 @@
 package com.pubsub.project2.dao;
 
 import static com.pubsub.project2.entity.tables.Topic.TOPIC;
+import static com.pubsub.project2.entity.tables.Subscription.SUBSCRIPTION;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,9 +29,13 @@ public class TopicDao{
 	
 	public TopicRecord findTopicByName(String topicName){
 		
-		return dsl.select().from(TOPIC).
+		Record record = dsl.select().from(TOPIC).
 				where(TOPIC.NAME.eq(topicName)).
-				fetchOne().into(TopicRecord.class);
+				fetchOne();
+		if(record!=null){
+			return record.into(TopicRecord.class);
+		}
+		return null;
 	}
 	
 	public TopicRecord findTopicById(Long topicId){
@@ -42,6 +49,18 @@ public class TopicDao{
 		
 		dsl.delete(TOPIC).where(TOPIC.NAME.eq(topicName));
 		return true;
+	}
+	
+	public List<Topic> findAllTopicsBySubscriberId(Long subscriberId){
+		
+		Result<?> result = dsl.select().from(TOPIC.join(SUBSCRIPTION).on(TOPIC.ID.eq(SUBSCRIPTION.TOPIC_ID))).where(SUBSCRIPTION.SUBSCRIBER_ID.eq(subscriberId)).fetch();
+		List<Topic> topicsList = new ArrayList<Topic>();
+		for (Record record: result){
+			Topic topic = new Topic();
+			topic.setName(record.get(TOPIC.NAME));
+			topicsList.add(topic);
+		}
+		return topicsList;
 	}
 	
 	public List<Topic> findAllTopics(){

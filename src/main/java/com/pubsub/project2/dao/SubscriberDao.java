@@ -1,5 +1,6 @@
 package com.pubsub.project2.dao;
 
+import static com.pubsub.project2.entity.tables.Publisher.PUBLISHER;
 import static com.pubsub.project2.entity.tables.Subscriber.SUBSCRIBER;
 import static com.pubsub.project2.entity.tables.Subscription.SUBSCRIPTION;
 import static com.pubsub.project2.entity.tables.Topic.TOPIC;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.pubsub.project2.dto.Subscriber;
+import com.pubsub.project2.entity.tables.records.PublisherRecord;
 import com.pubsub.project2.entity.tables.records.SubscriberRecord;
 import com.pubsub.project2.entity.tables.records.TopicRecord;
 
@@ -29,9 +31,13 @@ public class SubscriberDao{
 	
 	public Long addSubscriber(Subscriber subscriber){
 		
-		dsl.insertInto(SUBSCRIBER,SUBSCRIBER.WEBHOOK_URL)
-				.values(subscriber.getWebHookUrl()).execute();
-		SubscriberRecord record = dsl.select().from(SUBSCRIBER).where(SUBSCRIBER.WEBHOOK_URL.eq(subscriber.getWebHookUrl())).fetchOne().into(SubscriberRecord.class);
+		SubscriberRecord record = findSubscriberByWebhookUrl(subscriber.getWebHookUrl());
+		if(record == null){
+			dsl.insertInto(SUBSCRIBER,SUBSCRIBER.WEBHOOK_URL)
+			.values(subscriber.getWebHookUrl()).execute();
+			record = dsl.select().from(SUBSCRIBER).where(SUBSCRIBER.WEBHOOK_URL.eq(subscriber.getWebHookUrl())).fetchOne().into(SubscriberRecord.class);
+			System.out.println("Inserted subscriber with webhook::"+subscriber.getWebHookUrl());
+		}
 		return record.getId();
 	}
 	
@@ -51,13 +57,20 @@ public class SubscriberDao{
 		return dsl.select().from(SUBSCRIBER).where(SUBSCRIBER.ID.eq(subscriberId)).fetchOne().into(SubscriberRecord.class);
 	}
 	
-//	@SuppressWarnings("unchecked")
-//	public List<Subscriber> findAllSubscribers(){
-//		
-//		Session session = sessionFactory.getCurrentSession();
-//		Criteria crit = session.createCriteria(Subscriber.class);
-//		return (List<Subscriber>)crit.list();
-//	}
+	public SubscriberRecord findSubscriberByWebhookUrl(String webHookUrl){
+		
+		Record record = dsl.select().from(SUBSCRIBER).where(SUBSCRIBER.WEBHOOK_URL.eq(webHookUrl)).fetchOne(); 
+		if(record !=null){
+			return record.into(SubscriberRecord.class);
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SubscriberRecord> findAllSubscribers(){
+		
+		return dsl.select().from(SUBSCRIBER).fetch().into(SubscriberRecord.class);
+	}
 	
 	public List<SubscriberRecord> findAllSubscribersByTopic(String topicName){
 		
