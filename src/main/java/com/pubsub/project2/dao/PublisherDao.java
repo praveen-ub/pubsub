@@ -16,13 +16,17 @@ public class PublisherDao{
 	@Autowired
 	private DSLContext dsl;
 	
+	@Autowired
+	private RegionDao regionDao;
+	
 	public Long addPublisher(Publisher publisher){
 		
 		String webHookUrl = publisher.getWebHookUrl();
 		PublisherRecord record = findPublisherByWebhookUrl(webHookUrl);
+		Long regionId = regionDao.findRegionByName(publisher.getRegion()).getId();
 		if(record == null){
-			dsl.insertInto(PUBLISHER,PUBLISHER.WEBHOOK_URL)
-			.values(publisher.getWebHookUrl()).execute();
+			dsl.insertInto(PUBLISHER,PUBLISHER.WEBHOOK_URL,PUBLISHER.REGION_ID)
+			.values(publisher.getWebHookUrl(), regionId).execute();
 			record = dsl.select().from(PUBLISHER).where(PUBLISHER.WEBHOOK_URL.eq(publisher.getWebHookUrl())).fetchOne().into(PublisherRecord.class);
 			System.out.println("Inserted record");
 		}

@@ -1,8 +1,14 @@
-drop database pubsub_phase2;
+drop database pubsub_phase3;
 
-create database pubsub_phase2;
+create database pubsub_phase3;
 
-use pubsub_phase2;
+use pubsub_phase3;
+
+create table region (
+  id bigint not null auto_increment,
+  name varchar(255),
+  primary key(id)
+);
 
 create table publisher (
 
@@ -10,7 +16,9 @@ create table publisher (
     webhook_url varchar(255) not null,
     nick_name varchar(255),
     is_active tinyint(1) default 1,
-    primary key(id)
+    region_id bigint not null,
+    primary key(id),
+    foreign key(region_id) references region(id)
 );
 
 create table subscriber (
@@ -18,7 +26,9 @@ create table subscriber (
     webhook_url varchar(255) not null,
     nick_name varchar(255),
     is_active tinyint(1) default 1,
-    primary key(id)
+    region_id bigint not null,
+    primary key(id),
+    foreign key(region_id) references region(id)
 );
 
 create table topic (
@@ -51,3 +61,7 @@ create table subscription(
     foreign key (subscriber_id) references subscriber(id),
     foreign key (topic_id) references topic(id)
 );
+
+insert into region values (1,'India');
+insert into region values (2,'US');
+insert into region values (3,'UK');

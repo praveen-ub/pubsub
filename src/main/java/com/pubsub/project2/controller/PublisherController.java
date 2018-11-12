@@ -37,7 +37,7 @@ public class PublisherController{
 		Long publisherId = publisherService.register(publisher);
 		System.out.println("Registration done::"+publisherId);
 		Activity activity = new Activity();
-		activity.setAction("Publisher with endpoint::"+publisher.getWebHookUrl()+" has joined");
+		activity.setAction("Publisher with endpoint::"+publisher.getWebHookUrl()+" has joined from "+publisher.getRegion());
 		template.convertAndSend("/topic/registrations",activity);
 		HashMap dataMap = new HashMap();
 		dataMap.put("id", publisherId);

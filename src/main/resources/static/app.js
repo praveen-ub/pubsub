@@ -1,5 +1,18 @@
 var stompClient = null;
 
+var backEndHost = document.location.href.substring(0,document.location.href.length-1);
+$.ajax({
+  url: `${backEndHost}/api/regions/region`,
+  dataType: 'json',
+  success: function(response){
+    var region = response.data;
+    region = "My Region is "+region;
+    console.log("Region is::"+response.data);
+    $(".region-info").text(region);
+  }
+});
+
+
 function connect() {
     var socket = new SockJS('/event-service');
     stompClient = Stomp.over(socket);

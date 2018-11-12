@@ -28,87 +28,87 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MessageRecord extends UpdatableRecordImpl<MessageRecord> implements Record6<Long, String, String, Long, Long, Byte> {
 
-    private static final long serialVersionUID = 413578169;
+    private static final long serialVersionUID = -1447598083;
 
     /**
-     * Setter for <code>pubsub_phase2.message.id</code>.
+     * Setter for <code>pubsub_phase3.message.id</code>.
      */
     public void setId(Long value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.message.id</code>.
+     * Getter for <code>pubsub_phase3.message.id</code>.
      */
     public Long getId() {
         return (Long) get(0);
     }
 
     /**
-     * Setter for <code>pubsub_phase2.message.message_id</code>.
+     * Setter for <code>pubsub_phase3.message.message_id</code>.
      */
     public void setMessageId(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.message.message_id</code>.
+     * Getter for <code>pubsub_phase3.message.message_id</code>.
      */
     public String getMessageId() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>pubsub_phase2.message.content</code>.
+     * Setter for <code>pubsub_phase3.message.content</code>.
      */
     public void setContent(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.message.content</code>.
+     * Getter for <code>pubsub_phase3.message.content</code>.
      */
     public String getContent() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>pubsub_phase2.message.publisher_id</code>.
+     * Setter for <code>pubsub_phase3.message.publisher_id</code>.
      */
     public void setPublisherId(Long value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.message.publisher_id</code>.
+     * Getter for <code>pubsub_phase3.message.publisher_id</code>.
      */
     public Long getPublisherId() {
         return (Long) get(3);
     }
 
     /**
-     * Setter for <code>pubsub_phase2.message.topic_id</code>.
+     * Setter for <code>pubsub_phase3.message.topic_id</code>.
      */
     public void setTopicId(Long value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.message.topic_id</code>.
+     * Getter for <code>pubsub_phase3.message.topic_id</code>.
      */
     public Long getTopicId() {
         return (Long) get(4);
     }
 
     /**
-     * Setter for <code>pubsub_phase2.message.is_deleted</code>.
+     * Setter for <code>pubsub_phase3.message.is_deleted</code>.
      */
     public void setIsDeleted(Byte value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.message.is_deleted</code>.
+     * Getter for <code>pubsub_phase3.message.is_deleted</code>.
      */
     public Byte getIsDeleted() {
         return (Byte) get(5);

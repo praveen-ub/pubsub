@@ -6,7 +6,7 @@ package com.pubsub.project2.entity.tables;
 
 import com.pubsub.project2.entity.Indexes;
 import com.pubsub.project2.entity.Keys;
-import com.pubsub.project2.entity.PubsubPhase2;
+import com.pubsub.project2.entity.PubsubPhase3;
 import com.pubsub.project2.entity.tables.records.MessageRecord;
 
 import java.util.Arrays;
@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Message extends TableImpl<MessageRecord> {
 
-    private static final long serialVersionUID = -1239397192;
+    private static final long serialVersionUID = -1509732039;
 
     /**
-     * The reference instance of <code>pubsub_phase2.message</code>
+     * The reference instance of <code>pubsub_phase3.message</code>
      */
     public static final Message MESSAGE = new Message();
 
@@ -56,51 +56,51 @@ public class Message extends TableImpl<MessageRecord> {
     }
 
     /**
-     * The column <code>pubsub_phase2.message.id</code>.
+     * The column <code>pubsub_phase3.message.id</code>.
      */
     public final TableField<MessageRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>pubsub_phase2.message.message_id</code>.
+     * The column <code>pubsub_phase3.message.message_id</code>.
      */
     public final TableField<MessageRecord, String> MESSAGE_ID = createField("message_id", org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>pubsub_phase2.message.content</code>.
+     * The column <code>pubsub_phase3.message.content</code>.
      */
     public final TableField<MessageRecord, String> CONTENT = createField("content", org.jooq.impl.SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>pubsub_phase2.message.publisher_id</code>.
+     * The column <code>pubsub_phase3.message.publisher_id</code>.
      */
     public final TableField<MessageRecord, Long> PUBLISHER_ID = createField("publisher_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>pubsub_phase2.message.topic_id</code>.
+     * The column <code>pubsub_phase3.message.topic_id</code>.
      */
     public final TableField<MessageRecord, Long> TOPIC_ID = createField("topic_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>pubsub_phase2.message.is_deleted</code>.
+     * The column <code>pubsub_phase3.message.is_deleted</code>.
      */
     public final TableField<MessageRecord, Byte> IS_DELETED = createField("is_deleted", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
     /**
-     * Create a <code>pubsub_phase2.message</code> table reference
+     * Create a <code>pubsub_phase3.message</code> table reference
      */
     public Message() {
         this(DSL.name("message"), null);
     }
 
     /**
-     * Create an aliased <code>pubsub_phase2.message</code> table reference
+     * Create an aliased <code>pubsub_phase3.message</code> table reference
      */
     public Message(String alias) {
         this(DSL.name(alias), MESSAGE);
     }
 
     /**
-     * Create an aliased <code>pubsub_phase2.message</code> table reference
+     * Create an aliased <code>pubsub_phase3.message</code> table reference
      */
     public Message(Name alias) {
         this(alias, MESSAGE);
@@ -119,7 +119,7 @@ public class Message extends TableImpl<MessageRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PubsubPhase2.PUBSUB_PHASE2;
+        return PubsubPhase3.PUBSUB_PHASE3;
     }
 
     /**

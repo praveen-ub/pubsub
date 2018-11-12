@@ -40,7 +40,7 @@ public class SubscriberController{
 		Long subscriberId = subscriberService.register(subscriber);
 		System.out.println("Regisration done::"+subscriberId);
 		Activity activity = new Activity();
-		activity.setAction("Subscriber with endpoint::"+subscriber.getWebHookUrl()+" has joined");
+		activity.setAction("Subscriber with endpoint::"+subscriber.getWebHookUrl()+" has joined from "+subscriber.getRegion());
 		template.convertAndSend("/topic/registrations",activity);
 		HashMap dataMap = new HashMap();
 		dataMap.put("id",subscriberId);

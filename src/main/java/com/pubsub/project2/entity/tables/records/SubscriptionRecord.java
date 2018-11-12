@@ -28,45 +28,45 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SubscriptionRecord extends UpdatableRecordImpl<SubscriptionRecord> implements Record3<Long, Long, Long> {
 
-    private static final long serialVersionUID = 465693595;
+    private static final long serialVersionUID = 256934621;
 
     /**
-     * Setter for <code>pubsub_phase2.subscription.id</code>.
+     * Setter for <code>pubsub_phase3.subscription.id</code>.
      */
     public void setId(Long value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.subscription.id</code>.
+     * Getter for <code>pubsub_phase3.subscription.id</code>.
      */
     public Long getId() {
         return (Long) get(0);
     }
 
     /**
-     * Setter for <code>pubsub_phase2.subscription.subscriber_id</code>.
+     * Setter for <code>pubsub_phase3.subscription.subscriber_id</code>.
      */
     public void setSubscriberId(Long value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.subscription.subscriber_id</code>.
+     * Getter for <code>pubsub_phase3.subscription.subscriber_id</code>.
      */
     public Long getSubscriberId() {
         return (Long) get(1);
     }
 
     /**
-     * Setter for <code>pubsub_phase2.subscription.topic_id</code>.
+     * Setter for <code>pubsub_phase3.subscription.topic_id</code>.
      */
     public void setTopicId(Long value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.subscription.topic_id</code>.
+     * Getter for <code>pubsub_phase3.subscription.topic_id</code>.
      */
     public Long getTopicId() {
         return (Long) get(2);

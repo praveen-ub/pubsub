@@ -6,7 +6,7 @@ package com.pubsub.project2.entity.tables;
 
 import com.pubsub.project2.entity.Indexes;
 import com.pubsub.project2.entity.Keys;
-import com.pubsub.project2.entity.PubsubPhase2;
+import com.pubsub.project2.entity.PubsubPhase3;
 import com.pubsub.project2.entity.tables.records.SubscriberRecord;
 
 import java.util.Arrays;
@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
@@ -39,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Subscriber extends TableImpl<SubscriberRecord> {
 
-    private static final long serialVersionUID = -923170350;
+    private static final long serialVersionUID = 1282480806;
 
     /**
-     * The reference instance of <code>pubsub_phase2.subscriber</code>
+     * The reference instance of <code>pubsub_phase3.subscriber</code>
      */
     public static final Subscriber SUBSCRIBER = new Subscriber();
 
@@ -55,41 +56,46 @@ public class Subscriber extends TableImpl<SubscriberRecord> {
     }
 
     /**
-     * The column <code>pubsub_phase2.subscriber.id</code>.
+     * The column <code>pubsub_phase3.subscriber.id</code>.
      */
     public final TableField<SubscriberRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>pubsub_phase2.subscriber.webhook_url</code>.
+     * The column <code>pubsub_phase3.subscriber.webhook_url</code>.
      */
     public final TableField<SubscriberRecord, String> WEBHOOK_URL = createField("webhook_url", org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>pubsub_phase2.subscriber.nick_name</code>.
+     * The column <code>pubsub_phase3.subscriber.nick_name</code>.
      */
     public final TableField<SubscriberRecord, String> NICK_NAME = createField("nick_name", org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>pubsub_phase2.subscriber.is_active</code>.
+     * The column <code>pubsub_phase3.subscriber.is_active</code>.
      */
     public final TableField<SubscriberRecord, Byte> IS_ACTIVE = createField("is_active", org.jooq.impl.SQLDataType.TINYINT.defaultValue(org.jooq.impl.DSL.inline("1", org.jooq.impl.SQLDataType.TINYINT)), this, "");
 
     /**
-     * Create a <code>pubsub_phase2.subscriber</code> table reference
+     * The column <code>pubsub_phase3.subscriber.region_id</code>.
+     */
+    public final TableField<SubscriberRecord, Long> REGION_ID = createField("region_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+
+    /**
+     * Create a <code>pubsub_phase3.subscriber</code> table reference
      */
     public Subscriber() {
         this(DSL.name("subscriber"), null);
     }
 
     /**
-     * Create an aliased <code>pubsub_phase2.subscriber</code> table reference
+     * Create an aliased <code>pubsub_phase3.subscriber</code> table reference
      */
     public Subscriber(String alias) {
         this(DSL.name(alias), SUBSCRIBER);
     }
 
     /**
-     * Create an aliased <code>pubsub_phase2.subscriber</code> table reference
+     * Create an aliased <code>pubsub_phase3.subscriber</code> table reference
      */
     public Subscriber(Name alias) {
         this(alias, SUBSCRIBER);
@@ -108,7 +114,7 @@ public class Subscriber extends TableImpl<SubscriberRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PubsubPhase2.PUBSUB_PHASE2;
+        return PubsubPhase3.PUBSUB_PHASE3;
     }
 
     /**
@@ -116,7 +122,7 @@ public class Subscriber extends TableImpl<SubscriberRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.SUBSCRIBER_PRIMARY);
+        return Arrays.<Index>asList(Indexes.SUBSCRIBER_PRIMARY, Indexes.SUBSCRIBER_REGION_ID);
     }
 
     /**
@@ -141,6 +147,14 @@ public class Subscriber extends TableImpl<SubscriberRecord> {
     @Override
     public List<UniqueKey<SubscriberRecord>> getKeys() {
         return Arrays.<UniqueKey<SubscriberRecord>>asList(Keys.KEY_SUBSCRIBER_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ForeignKey<SubscriberRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<SubscriberRecord, ?>>asList(Keys.SUBSCRIBER_IBFK_1);
     }
 
     /**

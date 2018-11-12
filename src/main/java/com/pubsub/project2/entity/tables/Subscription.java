@@ -6,7 +6,7 @@ package com.pubsub.project2.entity.tables;
 
 import com.pubsub.project2.entity.Indexes;
 import com.pubsub.project2.entity.Keys;
-import com.pubsub.project2.entity.PubsubPhase2;
+import com.pubsub.project2.entity.PubsubPhase3;
 import com.pubsub.project2.entity.tables.records.SubscriptionRecord;
 
 import java.util.Arrays;
@@ -40,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Subscription extends TableImpl<SubscriptionRecord> {
 
-    private static final long serialVersionUID = -1345527278;
+    private static final long serialVersionUID = 1391973298;
 
     /**
-     * The reference instance of <code>pubsub_phase2.subscription</code>
+     * The reference instance of <code>pubsub_phase3.subscription</code>
      */
     public static final Subscription SUBSCRIPTION = new Subscription();
 
@@ -56,36 +56,36 @@ public class Subscription extends TableImpl<SubscriptionRecord> {
     }
 
     /**
-     * The column <code>pubsub_phase2.subscription.id</code>.
+     * The column <code>pubsub_phase3.subscription.id</code>.
      */
     public final TableField<SubscriptionRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>pubsub_phase2.subscription.subscriber_id</code>.
+     * The column <code>pubsub_phase3.subscription.subscriber_id</code>.
      */
     public final TableField<SubscriptionRecord, Long> SUBSCRIBER_ID = createField("subscriber_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>pubsub_phase2.subscription.topic_id</code>.
+     * The column <code>pubsub_phase3.subscription.topic_id</code>.
      */
     public final TableField<SubscriptionRecord, Long> TOPIC_ID = createField("topic_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * Create a <code>pubsub_phase2.subscription</code> table reference
+     * Create a <code>pubsub_phase3.subscription</code> table reference
      */
     public Subscription() {
         this(DSL.name("subscription"), null);
     }
 
     /**
-     * Create an aliased <code>pubsub_phase2.subscription</code> table reference
+     * Create an aliased <code>pubsub_phase3.subscription</code> table reference
      */
     public Subscription(String alias) {
         this(DSL.name(alias), SUBSCRIPTION);
     }
 
     /**
-     * Create an aliased <code>pubsub_phase2.subscription</code> table reference
+     * Create an aliased <code>pubsub_phase3.subscription</code> table reference
      */
     public Subscription(Name alias) {
         this(alias, SUBSCRIPTION);
@@ -104,7 +104,7 @@ public class Subscription extends TableImpl<SubscriptionRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PubsubPhase2.PUBSUB_PHASE2;
+        return PubsubPhase3.PUBSUB_PHASE3;
     }
 
     /**

@@ -6,7 +6,7 @@ package com.pubsub.project2.entity.tables;
 
 import com.pubsub.project2.entity.Indexes;
 import com.pubsub.project2.entity.Keys;
-import com.pubsub.project2.entity.PubsubPhase2;
+import com.pubsub.project2.entity.PubsubPhase3;
 import com.pubsub.project2.entity.tables.records.TopicRecord;
 
 import java.util.Arrays;
@@ -39,10 +39,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Topic extends TableImpl<TopicRecord> {
 
-    private static final long serialVersionUID = -35752556;
+    private static final long serialVersionUID = 1271763832;
 
     /**
-     * The reference instance of <code>pubsub_phase2.topic</code>
+     * The reference instance of <code>pubsub_phase3.topic</code>
      */
     public static final Topic TOPIC = new Topic();
 
@@ -55,36 +55,36 @@ public class Topic extends TableImpl<TopicRecord> {
     }
 
     /**
-     * The column <code>pubsub_phase2.topic.id</code>.
+     * The column <code>pubsub_phase3.topic.id</code>.
      */
     public final TableField<TopicRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>pubsub_phase2.topic.name</code>.
+     * The column <code>pubsub_phase3.topic.name</code>.
      */
     public final TableField<TopicRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>pubsub_phase2.topic.is_deleted</code>.
+     * The column <code>pubsub_phase3.topic.is_deleted</code>.
      */
     public final TableField<TopicRecord, Byte> IS_DELETED = createField("is_deleted", org.jooq.impl.SQLDataType.TINYINT.defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.TINYINT)), this, "");
 
     /**
-     * Create a <code>pubsub_phase2.topic</code> table reference
+     * Create a <code>pubsub_phase3.topic</code> table reference
      */
     public Topic() {
         this(DSL.name("topic"), null);
     }
 
     /**
-     * Create an aliased <code>pubsub_phase2.topic</code> table reference
+     * Create an aliased <code>pubsub_phase3.topic</code> table reference
      */
     public Topic(String alias) {
         this(DSL.name(alias), TOPIC);
     }
 
     /**
-     * Create an aliased <code>pubsub_phase2.topic</code> table reference
+     * Create an aliased <code>pubsub_phase3.topic</code> table reference
      */
     public Topic(Name alias) {
         this(alias, TOPIC);
@@ -103,7 +103,7 @@ public class Topic extends TableImpl<TopicRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PubsubPhase2.PUBSUB_PHASE2;
+        return PubsubPhase3.PUBSUB_PHASE3;
     }
 
     /**

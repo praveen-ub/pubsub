@@ -6,7 +6,7 @@ package com.pubsub.project2.entity.tables;
 
 import com.pubsub.project2.entity.Indexes;
 import com.pubsub.project2.entity.Keys;
-import com.pubsub.project2.entity.PubsubPhase2;
+import com.pubsub.project2.entity.PubsubPhase3;
 import com.pubsub.project2.entity.tables.records.PublisherRecord;
 
 import java.util.Arrays;
@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
@@ -39,10 +40,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Publisher extends TableImpl<PublisherRecord> {
 
-    private static final long serialVersionUID = 451306220;
+    private static final long serialVersionUID = -695119248;
 
     /**
-     * The reference instance of <code>pubsub_phase2.publisher</code>
+     * The reference instance of <code>pubsub_phase3.publisher</code>
      */
     public static final Publisher PUBLISHER = new Publisher();
 
@@ -55,41 +56,46 @@ public class Publisher extends TableImpl<PublisherRecord> {
     }
 
     /**
-     * The column <code>pubsub_phase2.publisher.id</code>.
+     * The column <code>pubsub_phase3.publisher.id</code>.
      */
     public final TableField<PublisherRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>pubsub_phase2.publisher.webhook_url</code>.
+     * The column <code>pubsub_phase3.publisher.webhook_url</code>.
      */
     public final TableField<PublisherRecord, String> WEBHOOK_URL = createField("webhook_url", org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
-     * The column <code>pubsub_phase2.publisher.nick_name</code>.
+     * The column <code>pubsub_phase3.publisher.nick_name</code>.
      */
     public final TableField<PublisherRecord, String> NICK_NAME = createField("nick_name", org.jooq.impl.SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * The column <code>pubsub_phase2.publisher.is_active</code>.
+     * The column <code>pubsub_phase3.publisher.is_active</code>.
      */
     public final TableField<PublisherRecord, Byte> IS_ACTIVE = createField("is_active", org.jooq.impl.SQLDataType.TINYINT.defaultValue(org.jooq.impl.DSL.inline("1", org.jooq.impl.SQLDataType.TINYINT)), this, "");
 
     /**
-     * Create a <code>pubsub_phase2.publisher</code> table reference
+     * The column <code>pubsub_phase3.publisher.region_id</code>.
+     */
+    public final TableField<PublisherRecord, Long> REGION_ID = createField("region_id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+
+    /**
+     * Create a <code>pubsub_phase3.publisher</code> table reference
      */
     public Publisher() {
         this(DSL.name("publisher"), null);
     }
 
     /**
-     * Create an aliased <code>pubsub_phase2.publisher</code> table reference
+     * Create an aliased <code>pubsub_phase3.publisher</code> table reference
      */
     public Publisher(String alias) {
         this(DSL.name(alias), PUBLISHER);
     }
 
     /**
-     * Create an aliased <code>pubsub_phase2.publisher</code> table reference
+     * Create an aliased <code>pubsub_phase3.publisher</code> table reference
      */
     public Publisher(Name alias) {
         this(alias, PUBLISHER);
@@ -108,7 +114,7 @@ public class Publisher extends TableImpl<PublisherRecord> {
      */
     @Override
     public Schema getSchema() {
-        return PubsubPhase2.PUBSUB_PHASE2;
+        return PubsubPhase3.PUBSUB_PHASE3;
     }
 
     /**
@@ -116,7 +122,7 @@ public class Publisher extends TableImpl<PublisherRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.PUBLISHER_PRIMARY);
+        return Arrays.<Index>asList(Indexes.PUBLISHER_PRIMARY, Indexes.PUBLISHER_REGION_ID);
     }
 
     /**
@@ -141,6 +147,14 @@ public class Publisher extends TableImpl<PublisherRecord> {
     @Override
     public List<UniqueKey<PublisherRecord>> getKeys() {
         return Arrays.<UniqueKey<PublisherRecord>>asList(Keys.KEY_PUBLISHER_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ForeignKey<PublisherRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<PublisherRecord, ?>>asList(Keys.PUBLISHER_IBFK_1);
     }
 
     /**

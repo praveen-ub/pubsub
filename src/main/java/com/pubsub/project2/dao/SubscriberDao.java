@@ -1,6 +1,5 @@
 package com.pubsub.project2.dao;
 
-import static com.pubsub.project2.entity.tables.Publisher.PUBLISHER;
 import static com.pubsub.project2.entity.tables.Subscriber.SUBSCRIBER;
 import static com.pubsub.project2.entity.tables.Subscription.SUBSCRIPTION;
 import static com.pubsub.project2.entity.tables.Topic.TOPIC;
@@ -16,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.pubsub.project2.dto.Subscriber;
-import com.pubsub.project2.entity.tables.records.PublisherRecord;
 import com.pubsub.project2.entity.tables.records.SubscriberRecord;
 import com.pubsub.project2.entity.tables.records.TopicRecord;
 
@@ -29,12 +27,16 @@ public class SubscriberDao{
 	@Autowired
 	private TopicDao topicDao;
 	
+	@Autowired
+	private RegionDao regionDao;
+	
 	public Long addSubscriber(Subscriber subscriber){
 		
 		SubscriberRecord record = findSubscriberByWebhookUrl(subscriber.getWebHookUrl());
+		Long regionId = regionDao.findRegionByName(subscriber.getRegion()).getId();
 		if(record == null){
-			dsl.insertInto(SUBSCRIBER,SUBSCRIBER.WEBHOOK_URL)
-			.values(subscriber.getWebHookUrl()).execute();
+			dsl.insertInto(SUBSCRIBER,SUBSCRIBER.WEBHOOK_URL, SUBSCRIBER.REGION_ID)
+			.values(subscriber.getWebHookUrl(), regionId).execute();
 			record = dsl.select().from(SUBSCRIBER).where(SUBSCRIBER.WEBHOOK_URL.eq(subscriber.getWebHookUrl())).fetchOne().into(SubscriberRecord.class);
 			System.out.println("Inserted subscriber with webhook::"+subscriber.getWebHookUrl());
 		}

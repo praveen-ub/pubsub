@@ -6,6 +6,7 @@ package com.pubsub.project2.entity;
 
 import com.pubsub.project2.entity.tables.Message;
 import com.pubsub.project2.entity.tables.Publisher;
+import com.pubsub.project2.entity.tables.Region;
 import com.pubsub.project2.entity.tables.Subscriber;
 import com.pubsub.project2.entity.tables.Subscription;
 import com.pubsub.project2.entity.tables.Topic;
@@ -14,7 +15,7 @@ import javax.annotation.Generated;
 
 
 /**
- * Convenience access to all tables in pubsub_phase2
+ * Convenience access to all tables in pubsub_phase3
  */
 @Generated(
     value = {
@@ -27,27 +28,32 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>pubsub_phase2.message</code>.
+     * The table <code>pubsub_phase3.message</code>.
      */
     public static final Message MESSAGE = com.pubsub.project2.entity.tables.Message.MESSAGE;
 
     /**
-     * The table <code>pubsub_phase2.publisher</code>.
+     * The table <code>pubsub_phase3.publisher</code>.
      */
     public static final Publisher PUBLISHER = com.pubsub.project2.entity.tables.Publisher.PUBLISHER;
 
     /**
-     * The table <code>pubsub_phase2.subscriber</code>.
+     * The table <code>pubsub_phase3.region</code>.
+     */
+    public static final Region REGION = com.pubsub.project2.entity.tables.Region.REGION;
+
+    /**
+     * The table <code>pubsub_phase3.subscriber</code>.
      */
     public static final Subscriber SUBSCRIBER = com.pubsub.project2.entity.tables.Subscriber.SUBSCRIBER;
 
     /**
-     * The table <code>pubsub_phase2.subscription</code>.
+     * The table <code>pubsub_phase3.subscription</code>.
      */
     public static final Subscription SUBSCRIPTION = com.pubsub.project2.entity.tables.Subscription.SUBSCRIPTION;
 
     /**
-     * The table <code>pubsub_phase2.topic</code>.
+     * The table <code>pubsub_phase3.topic</code>.
      */
     public static final Topic TOPIC = com.pubsub.project2.entity.tables.Topic.TOPIC;
 }

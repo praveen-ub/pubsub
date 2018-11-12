@@ -6,6 +6,7 @@ package com.pubsub.project2.entity;
 
 import com.pubsub.project2.entity.tables.Message;
 import com.pubsub.project2.entity.tables.Publisher;
+import com.pubsub.project2.entity.tables.Region;
 import com.pubsub.project2.entity.tables.Subscriber;
 import com.pubsub.project2.entity.tables.Subscription;
 import com.pubsub.project2.entity.tables.Topic;
@@ -18,7 +19,7 @@ import org.jooq.impl.Internal;
 
 
 /**
- * A class modelling indexes of tables of the <code>pubsub_phase2</code> schema.
+ * A class modelling indexes of tables of the <code>pubsub_phase3</code> schema.
  */
 @Generated(
     value = {
@@ -38,7 +39,10 @@ public class Indexes {
     public static final Index MESSAGE_PUBLISHER_ID = Indexes0.MESSAGE_PUBLISHER_ID;
     public static final Index MESSAGE_TOPIC_ID = Indexes0.MESSAGE_TOPIC_ID;
     public static final Index PUBLISHER_PRIMARY = Indexes0.PUBLISHER_PRIMARY;
+    public static final Index PUBLISHER_REGION_ID = Indexes0.PUBLISHER_REGION_ID;
+    public static final Index REGION_PRIMARY = Indexes0.REGION_PRIMARY;
     public static final Index SUBSCRIBER_PRIMARY = Indexes0.SUBSCRIBER_PRIMARY;
+    public static final Index SUBSCRIBER_REGION_ID = Indexes0.SUBSCRIBER_REGION_ID;
     public static final Index SUBSCRIPTION_PRIMARY = Indexes0.SUBSCRIPTION_PRIMARY;
     public static final Index SUBSCRIPTION_SUBSCRIBER_ID = Indexes0.SUBSCRIPTION_SUBSCRIBER_ID;
     public static final Index SUBSCRIPTION_TOPIC_ID = Indexes0.SUBSCRIPTION_TOPIC_ID;
@@ -53,7 +57,10 @@ public class Indexes {
         public static Index MESSAGE_PUBLISHER_ID = Internal.createIndex("publisher_id", Message.MESSAGE, new OrderField[] { Message.MESSAGE.PUBLISHER_ID }, false);
         public static Index MESSAGE_TOPIC_ID = Internal.createIndex("topic_id", Message.MESSAGE, new OrderField[] { Message.MESSAGE.TOPIC_ID }, false);
         public static Index PUBLISHER_PRIMARY = Internal.createIndex("PRIMARY", Publisher.PUBLISHER, new OrderField[] { Publisher.PUBLISHER.ID }, true);
+        public static Index PUBLISHER_REGION_ID = Internal.createIndex("region_id", Publisher.PUBLISHER, new OrderField[] { Publisher.PUBLISHER.REGION_ID }, false);
+        public static Index REGION_PRIMARY = Internal.createIndex("PRIMARY", Region.REGION, new OrderField[] { Region.REGION.ID }, true);
         public static Index SUBSCRIBER_PRIMARY = Internal.createIndex("PRIMARY", Subscriber.SUBSCRIBER, new OrderField[] { Subscriber.SUBSCRIBER.ID }, true);
+        public static Index SUBSCRIBER_REGION_ID = Internal.createIndex("region_id", Subscriber.SUBSCRIBER, new OrderField[] { Subscriber.SUBSCRIBER.REGION_ID }, false);
         public static Index SUBSCRIPTION_PRIMARY = Internal.createIndex("PRIMARY", Subscription.SUBSCRIPTION, new OrderField[] { Subscription.SUBSCRIPTION.ID }, true);
         public static Index SUBSCRIPTION_SUBSCRIBER_ID = Internal.createIndex("subscriber_id", Subscription.SUBSCRIPTION, new OrderField[] { Subscription.SUBSCRIPTION.SUBSCRIBER_ID }, false);
         public static Index SUBSCRIPTION_TOPIC_ID = Internal.createIndex("topic_id", Subscription.SUBSCRIPTION, new OrderField[] { Subscription.SUBSCRIPTION.TOPIC_ID }, false);

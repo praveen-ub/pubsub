@@ -6,11 +6,13 @@ package com.pubsub.project2.entity;
 
 import com.pubsub.project2.entity.tables.Message;
 import com.pubsub.project2.entity.tables.Publisher;
+import com.pubsub.project2.entity.tables.Region;
 import com.pubsub.project2.entity.tables.Subscriber;
 import com.pubsub.project2.entity.tables.Subscription;
 import com.pubsub.project2.entity.tables.Topic;
 import com.pubsub.project2.entity.tables.records.MessageRecord;
 import com.pubsub.project2.entity.tables.records.PublisherRecord;
+import com.pubsub.project2.entity.tables.records.RegionRecord;
 import com.pubsub.project2.entity.tables.records.SubscriberRecord;
 import com.pubsub.project2.entity.tables.records.SubscriptionRecord;
 import com.pubsub.project2.entity.tables.records.TopicRecord;
@@ -25,7 +27,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>pubsub_phase2</code> schema.
+ * the <code>pubsub_phase3</code> schema.
  */
 @Generated(
     value = {
@@ -43,6 +45,7 @@ public class Keys {
 
     public static final Identity<MessageRecord, Long> IDENTITY_MESSAGE = Identities0.IDENTITY_MESSAGE;
     public static final Identity<PublisherRecord, Long> IDENTITY_PUBLISHER = Identities0.IDENTITY_PUBLISHER;
+    public static final Identity<RegionRecord, Long> IDENTITY_REGION = Identities0.IDENTITY_REGION;
     public static final Identity<SubscriberRecord, Long> IDENTITY_SUBSCRIBER = Identities0.IDENTITY_SUBSCRIBER;
     public static final Identity<SubscriptionRecord, Long> IDENTITY_SUBSCRIPTION = Identities0.IDENTITY_SUBSCRIPTION;
     public static final Identity<TopicRecord, Long> IDENTITY_TOPIC = Identities0.IDENTITY_TOPIC;
@@ -53,6 +56,7 @@ public class Keys {
 
     public static final UniqueKey<MessageRecord> KEY_MESSAGE_PRIMARY = UniqueKeys0.KEY_MESSAGE_PRIMARY;
     public static final UniqueKey<PublisherRecord> KEY_PUBLISHER_PRIMARY = UniqueKeys0.KEY_PUBLISHER_PRIMARY;
+    public static final UniqueKey<RegionRecord> KEY_REGION_PRIMARY = UniqueKeys0.KEY_REGION_PRIMARY;
     public static final UniqueKey<SubscriberRecord> KEY_SUBSCRIBER_PRIMARY = UniqueKeys0.KEY_SUBSCRIBER_PRIMARY;
     public static final UniqueKey<SubscriptionRecord> KEY_SUBSCRIPTION_PRIMARY = UniqueKeys0.KEY_SUBSCRIPTION_PRIMARY;
     public static final UniqueKey<TopicRecord> KEY_TOPIC_PRIMARY = UniqueKeys0.KEY_TOPIC_PRIMARY;
@@ -63,6 +67,8 @@ public class Keys {
 
     public static final ForeignKey<MessageRecord, PublisherRecord> MESSAGE_IBFK_1 = ForeignKeys0.MESSAGE_IBFK_1;
     public static final ForeignKey<MessageRecord, TopicRecord> MESSAGE_IBFK_2 = ForeignKeys0.MESSAGE_IBFK_2;
+    public static final ForeignKey<PublisherRecord, RegionRecord> PUBLISHER_IBFK_1 = ForeignKeys0.PUBLISHER_IBFK_1;
+    public static final ForeignKey<SubscriberRecord, RegionRecord> SUBSCRIBER_IBFK_1 = ForeignKeys0.SUBSCRIBER_IBFK_1;
     public static final ForeignKey<SubscriptionRecord, SubscriberRecord> SUBSCRIPTION_IBFK_1 = ForeignKeys0.SUBSCRIPTION_IBFK_1;
     public static final ForeignKey<SubscriptionRecord, TopicRecord> SUBSCRIPTION_IBFK_2 = ForeignKeys0.SUBSCRIPTION_IBFK_2;
 
@@ -73,6 +79,7 @@ public class Keys {
     private static class Identities0 {
         public static Identity<MessageRecord, Long> IDENTITY_MESSAGE = Internal.createIdentity(Message.MESSAGE, Message.MESSAGE.ID);
         public static Identity<PublisherRecord, Long> IDENTITY_PUBLISHER = Internal.createIdentity(Publisher.PUBLISHER, Publisher.PUBLISHER.ID);
+        public static Identity<RegionRecord, Long> IDENTITY_REGION = Internal.createIdentity(Region.REGION, Region.REGION.ID);
         public static Identity<SubscriberRecord, Long> IDENTITY_SUBSCRIBER = Internal.createIdentity(Subscriber.SUBSCRIBER, Subscriber.SUBSCRIBER.ID);
         public static Identity<SubscriptionRecord, Long> IDENTITY_SUBSCRIPTION = Internal.createIdentity(Subscription.SUBSCRIPTION, Subscription.SUBSCRIPTION.ID);
         public static Identity<TopicRecord, Long> IDENTITY_TOPIC = Internal.createIdentity(Topic.TOPIC, Topic.TOPIC.ID);
@@ -81,6 +88,7 @@ public class Keys {
     private static class UniqueKeys0 {
         public static final UniqueKey<MessageRecord> KEY_MESSAGE_PRIMARY = Internal.createUniqueKey(Message.MESSAGE, "KEY_message_PRIMARY", Message.MESSAGE.ID);
         public static final UniqueKey<PublisherRecord> KEY_PUBLISHER_PRIMARY = Internal.createUniqueKey(Publisher.PUBLISHER, "KEY_publisher_PRIMARY", Publisher.PUBLISHER.ID);
+        public static final UniqueKey<RegionRecord> KEY_REGION_PRIMARY = Internal.createUniqueKey(Region.REGION, "KEY_region_PRIMARY", Region.REGION.ID);
         public static final UniqueKey<SubscriberRecord> KEY_SUBSCRIBER_PRIMARY = Internal.createUniqueKey(Subscriber.SUBSCRIBER, "KEY_subscriber_PRIMARY", Subscriber.SUBSCRIBER.ID);
         public static final UniqueKey<SubscriptionRecord> KEY_SUBSCRIPTION_PRIMARY = Internal.createUniqueKey(Subscription.SUBSCRIPTION, "KEY_subscription_PRIMARY", Subscription.SUBSCRIPTION.ID);
         public static final UniqueKey<TopicRecord> KEY_TOPIC_PRIMARY = Internal.createUniqueKey(Topic.TOPIC, "KEY_topic_PRIMARY", Topic.TOPIC.ID);
@@ -89,6 +97,8 @@ public class Keys {
     private static class ForeignKeys0 {
         public static final ForeignKey<MessageRecord, PublisherRecord> MESSAGE_IBFK_1 = Internal.createForeignKey(com.pubsub.project2.entity.Keys.KEY_PUBLISHER_PRIMARY, Message.MESSAGE, "message_ibfk_1", Message.MESSAGE.PUBLISHER_ID);
         public static final ForeignKey<MessageRecord, TopicRecord> MESSAGE_IBFK_2 = Internal.createForeignKey(com.pubsub.project2.entity.Keys.KEY_TOPIC_PRIMARY, Message.MESSAGE, "message_ibfk_2", Message.MESSAGE.TOPIC_ID);
+        public static final ForeignKey<PublisherRecord, RegionRecord> PUBLISHER_IBFK_1 = Internal.createForeignKey(com.pubsub.project2.entity.Keys.KEY_REGION_PRIMARY, Publisher.PUBLISHER, "publisher_ibfk_1", Publisher.PUBLISHER.REGION_ID);
+        public static final ForeignKey<SubscriberRecord, RegionRecord> SUBSCRIBER_IBFK_1 = Internal.createForeignKey(com.pubsub.project2.entity.Keys.KEY_REGION_PRIMARY, Subscriber.SUBSCRIBER, "subscriber_ibfk_1", Subscriber.SUBSCRIBER.REGION_ID);
         public static final ForeignKey<SubscriptionRecord, SubscriberRecord> SUBSCRIPTION_IBFK_1 = Internal.createForeignKey(com.pubsub.project2.entity.Keys.KEY_SUBSCRIBER_PRIMARY, Subscription.SUBSCRIPTION, "subscription_ibfk_1", Subscription.SUBSCRIPTION.SUBSCRIBER_ID);
         public static final ForeignKey<SubscriptionRecord, TopicRecord> SUBSCRIPTION_IBFK_2 = Internal.createForeignKey(com.pubsub.project2.entity.Keys.KEY_TOPIC_PRIMARY, Subscription.SUBSCRIPTION, "subscription_ibfk_2", Subscription.SUBSCRIPTION.TOPIC_ID);
     }

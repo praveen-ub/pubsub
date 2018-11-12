@@ -28,45 +28,45 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TopicRecord extends UpdatableRecordImpl<TopicRecord> implements Record3<Long, String, Byte> {
 
-    private static final long serialVersionUID = -1284484100;
+    private static final long serialVersionUID = 1058362618;
 
     /**
-     * Setter for <code>pubsub_phase2.topic.id</code>.
+     * Setter for <code>pubsub_phase3.topic.id</code>.
      */
     public void setId(Long value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.topic.id</code>.
+     * Getter for <code>pubsub_phase3.topic.id</code>.
      */
     public Long getId() {
         return (Long) get(0);
     }
 
     /**
-     * Setter for <code>pubsub_phase2.topic.name</code>.
+     * Setter for <code>pubsub_phase3.topic.name</code>.
      */
     public void setName(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.topic.name</code>.
+     * Getter for <code>pubsub_phase3.topic.name</code>.
      */
     public String getName() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>pubsub_phase2.topic.is_deleted</code>.
+     * Setter for <code>pubsub_phase3.topic.is_deleted</code>.
      */
     public void setIsDeleted(Byte value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>pubsub_phase2.topic.is_deleted</code>.
+     * Getter for <code>pubsub_phase3.topic.is_deleted</code>.
      */
     public Byte getIsDeleted() {
         return (Byte) get(2);
